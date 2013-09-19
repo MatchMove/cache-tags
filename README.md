@@ -1,0 +1,1 @@
+# This uses the same configuration used by Kohana/Cache
