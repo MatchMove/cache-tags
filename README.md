@@ -1,1 +1,2 @@
-# This uses the same configuration used by Kohana/Cache
+# Reduced network load caching using APC and Memcache
+## High-performance caching
