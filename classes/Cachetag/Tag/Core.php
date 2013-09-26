@@ -20,7 +20,7 @@ class Cachetag_Tag_Core {
     
     public function __toString()
     {
-        $this->get($this->_tags);
+        return $this->get($this->_tags);
     }
     
     /**
@@ -90,14 +90,17 @@ class Cachetag_Tag_Core {
      *
      * @param  mixed  $name  name of the tag
      */
-    public function flush($name)
+    public function flush($name = array())
     {
+        if (empty($name))
+        {
+            $name = $this->_tags;
+        }
+        
         if (!is_array($name))
         {
             $name = array($name);
         }
-        
-        $key = '';
         
         foreach ($name as $item)
         {

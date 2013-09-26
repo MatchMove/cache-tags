@@ -53,6 +53,18 @@ class Cachetag_Core {
     }
     
     /**
+     * sets tag for the token.
+     *
+     * return Cache
+     */
+    public function reset()
+    {
+        $this->tag()->set(array());
+        
+        return $this;
+    }
+    
+    /**
      * get the cache instance being used
      *
      * return Cache
@@ -98,13 +110,25 @@ class Cachetag_Core {
     /**
      * get the cache token
      *
-     * @param  string  $id       name of the token
-     * @param  string  $data  return value if token does not exist
-     * @param  string  $data  return value if token does not exist
+     * @param  string   $id        name of the token
+     * @param  string   $data      return value if token does not exist
+     * @param  integer  $lifetime  cache lifetime
      * return string
      */
     public function set($id, $data, $lifetime = NULL)
     {
         return $this->cache()->set($this->get_id($id), $data, $lifetime);
+    }
+    
+    /**
+     * sets tag for the token.
+     *
+     * return Cache
+     */
+    public function flush()
+    {
+        $this->tag()->flush();
+        
+        return $this;
     }
 }
