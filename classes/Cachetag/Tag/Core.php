@@ -59,7 +59,7 @@ class Cachetag_Tag_Core {
         
         foreach ($name as $item)
         {
-            $key = $this->_get($item);
+            $key .= $this->_get($item);
         }
         
         return $key;
