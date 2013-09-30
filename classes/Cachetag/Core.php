@@ -115,7 +115,7 @@ class Cachetag_Core {
      * @param  integer  $lifetime  cache lifetime
      * return string
      */
-    public function set($id, $data, $lifetime = NULL)
+    public function set($id, $data, $lifetime = Date::DAY)
     {
         return $this->cache()->set($this->get_id($id), $data, $lifetime);
     }
