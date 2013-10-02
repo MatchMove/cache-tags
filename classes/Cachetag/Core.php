@@ -117,7 +117,9 @@ class Cachetag_Core {
      */
     public function set($id, $data, $lifetime = Date::DAY)
     {
-        return $this->cache()->set($this->get_id($id), $data, $lifetime);
+        $this->cache()->set($this->get_id($id), $data, $lifetime);
+        
+        return $this;
     }
     
     /**
