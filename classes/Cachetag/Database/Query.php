@@ -93,12 +93,22 @@ class Cachetag_Database_Query extends Kohana_Database_Query {
 
         if ($this->_lifetime > 0 && $this->_type === Database::SELECT)
         {
+            if (Kohana::$profiling === TRUE)
+            {
+                $benchmark = Profiler::start('Cache_Tag', 'DB: "' . $db . '", Query: "' . $sql . '")');
+            }
+            
             // Set the cache key based on the database instance name and SQL
             $cache_key = 'Database::query("'.$db.'", "'.$sql.'")';
 
             // Read the cache first to delete a possible hit with lifetime <= 0
             if (($result = Database_Query::$_cache->get($cache_key, NULL)) !== NULL && ! $this->_force_execute)
             {
+                if (isset($benchmark))
+                {
+                    Profiler::stop($benchmark);
+                }
+                
                 Database_Query::$_cache->reset();
                 // Return a cached result
                 return new Database_Result_Cached($result, $sql, $as_object, $object_params);
@@ -114,6 +124,10 @@ class Cachetag_Database_Query extends Kohana_Database_Query {
         }
         elseif (isset($cache_key) && $this->_lifetime > 0)
         {
+            if (isset($benchmark))
+            {
+                Profiler::stop($benchmark);
+            }
             // Cache the result array
             Database_Query::$_cache->set($cache_key, $result->as_array(), $this->_lifetime);
             Database_Query::$_cache->reset();
