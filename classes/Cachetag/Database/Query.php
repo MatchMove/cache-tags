@@ -95,7 +95,7 @@ class Cachetag_Database_Query extends Kohana_Database_Query {
         {
             if (Kohana::$profiling === TRUE)
             {
-                $benchmark = Profiler::start('Cache_Tag', 'DB: "' . $db . '", Query: "' . $sql . '")');
+                $benchmark = Profiler::start('Cache_Tag', 'DB: "' . $db . '", Tags: "' . json_encode($this->get_tags()) .  '", Query: "' . $sql . '")');
             }
             
             // Set the cache key based on the database instance name and SQL
